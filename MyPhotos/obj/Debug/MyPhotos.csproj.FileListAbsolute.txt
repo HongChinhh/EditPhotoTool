@@ -8,3 +8,15 @@ C:\Users\Administrator\Documents\Github\EditPhotoTool\MyPhotos\MyPhotos\obj\Debu
 C:\Users\Administrator\Documents\Github\EditPhotoTool\MyPhotos\MyPhotos\obj\Debug\MyPhotos.exe
 C:\Users\Administrator\Documents\Github\EditPhotoTool\MyPhotos\MyPhotos\obj\Debug\MyPhotos.pdb
 C:\Users\Administrator\Documents\Github\EditPhotoTool\MyPhotos\MyPhotos\obj\Debug\MyPhotos.MainForm.resources
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\bin\Debug\MyPhotos.exe.config
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\bin\Debug\MyPhotos.exe
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\bin\Debug\MyPhotos.pdb
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\obj\Debug\MyPhotos.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\obj\Debug\MyPhotos.MainForm.resources
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\obj\Debug\MyPhotos.Properties.Resources.resources
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\obj\Debug\MyPhotos.csproj.GenerateResource.Cache
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\obj\Debug\MyPhotos.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\obj\Debug\MyPhotos.exe
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\obj\Debug\MyPhotos.pdb
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\bin\Debug\MyPhotoAlbum.dll
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\bin\Debug\MyPhotoAlbum.pdb
