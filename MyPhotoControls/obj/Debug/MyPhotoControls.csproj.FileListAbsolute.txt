@@ -1,0 +1,12 @@
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\bin\Debug\MyPhotoControls.dll
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\bin\Debug\MyPhotoControls.pdb
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\bin\Debug\MyPhotoAlbum.dll
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\bin\Debug\MyPhotoAlbum.pdb
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\obj\Debug\MyPhotoControls.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\obj\Debug\Manning.MyPhotoControls.PixelDialog.resources
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\obj\Debug\MyPhotoControls.csproj.GenerateResource.Cache
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\obj\Debug\MyPhotoControls.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\obj\Debug\MyPhotoControls.dll
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\obj\Debug\MyPhotoControls.pdb
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\obj\Debug\Manning.MyPhotoControls.BaseEditDialog.resources
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\obj\Debug\Manning.MyPhotoControls.PhotoEditDialog.resources

@@ -20,3 +20,5 @@ C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\obj
 C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\obj\Debug\MyPhotos.pdb
 C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\bin\Debug\MyPhotoAlbum.dll
 C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\bin\Debug\MyPhotoAlbum.pdb
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\bin\Debug\MyPhotoControls.dll
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotos\bin\Debug\MyPhotoControls.pdb
