@@ -16,6 +16,15 @@ namespace Manning.MyPhotoAlbum
             get { return _defaultPath; }
             set { _defaultPath = value; }
         }
+        private string _pwd;
+        public string Password
+        {
+            get { return _pwd; }
+            set
+            {
+                _pwd = value;
+            }
+        }
 
         static AlbumManager()
         {

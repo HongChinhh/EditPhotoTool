@@ -1,6 +1,5 @@
 C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoAlbum\bin\Debug\MyPhotoAlbum.dll
 C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoAlbum\bin\Debug\MyPhotoAlbum.pdb
-C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoAlbum\obj\Debug\MyPhotoAlbum.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoAlbum\obj\Debug\MyPhotoAlbum.csproj.CoreCompileInputs.cache
 C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoAlbum\obj\Debug\MyPhotoAlbum.dll
 C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoAlbum\obj\Debug\MyPhotoAlbum.pdb

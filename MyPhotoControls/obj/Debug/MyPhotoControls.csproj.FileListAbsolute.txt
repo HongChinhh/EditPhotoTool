@@ -10,3 +10,4 @@ C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoContr
 C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\obj\Debug\MyPhotoControls.pdb
 C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\obj\Debug\Manning.MyPhotoControls.BaseEditDialog.resources
 C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\obj\Debug\Manning.MyPhotoControls.PhotoEditDialog.resources
+C:\Users\Administrator\Documents\Github\EditPhotoTool\EditPhotoTool\MyPhotoControls\obj\Debug\Manning.MyPhotoControls.AlbumEditDialog.resources

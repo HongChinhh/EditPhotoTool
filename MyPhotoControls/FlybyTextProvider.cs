@@ -1,0 +1,112 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.ComponentModel;
+using System.Collections;
+
+namespace Manning.MyPhotoControls
+{
+    [ProvideProperty("FlybyText", typeof(ToolStripMenuItem))]
+
+    public class FlybyTextProvider: Component, IExtenderProvider
+    {
+        public FlybyTextProvider( IContainer container)
+        {
+            container.Add(this);
+        }
+        private Hashtable _flybyTable = new Hashtable();
+        private Hashtable FlybyTable
+        {
+            get { return _flybyTable; }
+        }
+
+        private ToolStripLabel _statusLabel = null;
+        public ToolStripLabel StatusLabel
+        {
+            get { return _statusLabel; }
+            set { _statusLabel = value; }
+        }
+        private string _currentText = null;
+        private string CurrentStatusText
+        {
+            get { return _currentText; }
+            set { _currentText = value; }
+        }
+        public bool CanExtend(object extendee)
+        {
+            return (extendee is ToolStripMenuItem);
+        }
+        public void SetFlybyText (ToolStripMenuItem item, string text)
+        {
+            if (text == null || text.Length == 0)
+            {
+                // Clear item's text, if necessary
+                if (FlybyTable.Contains(item))
+                {
+                    FlybyTable.Remove(item);
+                    item.MouseHover -= OnMouseHover;
+                    item.MouseLeave -= OnMouseLeave;
+                    item.MouseDown -= OnMouseDown;
+                }
+            }
+            else
+            {
+                // Write or overwrite the item's text
+
+                FlybyTable[item] = text;
+                item.MouseHover += OnMouseHover;
+                item.MouseLeave += OnMouseLeave;
+                item.MouseDown += OnMouseDown;
+
+            }
+        }
+
+        public string GetFlybyText(ToolStripMenuItem item)
+        {
+            return FlybyTable[item] as string; 
+        }
+
+        private void ShowFlyby (object item)
+        {
+            string flybyText = FlybyTable[item] as string;
+            if (flybyText != null && StatusLabel != null)
+            {
+                CurrentStatusText = StatusLabel.Text;
+                StatusLabel.Text = flybyText;
+            }
+        }
+
+        public void RevertFlyby( object item)
+        {
+            if(StatusLabel != null)
+            {
+                StatusLabel.Text = CurrentStatusText;
+                CurrentStatusText = null;
+
+            }
+        }
+        private void    OnMouseHover (object sender, EventArgs e)
+        {
+            // Dislay flyby text on hover if assigned
+            ShowFlyby(sender);
+
+        }
+
+        public void OnMouseLeave (object sender, EventArgs e)
+        {
+            // REvert to status text when mouse leaves
+            RevertFlyby(sender);
+        }
+
+        public void OnMouseDown(object sender, EventArgs e)
+        {
+            // REvert to status text when mouse pressed
+            RevertFlyby(sender);
+        }
+    }
+
+
+}
