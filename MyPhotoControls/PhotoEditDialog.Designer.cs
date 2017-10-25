@@ -36,9 +36,9 @@
             this.txtPhotoFile = new System.Windows.Forms.TextBox();
             this.txtCaption = new System.Windows.Forms.TextBox();
             this.txtPhotographer = new System.Windows.Forms.TextBox();
+            this.mskDateTaken = new System.Windows.Forms.MaskedTextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtNotes = new System.Windows.Forms.TextBox();
-            this.mskDateTaken = new System.Windows.Forms.MaskedTextBox();
             this.panel1.SuspendLayout();
             this.tblPanel.SuspendLayout();
             this.SuspendLayout();
@@ -138,6 +138,16 @@
             this.txtPhotographer.Size = new System.Drawing.Size(162, 20);
             this.txtPhotographer.TabIndex = 7;
             // 
+            // mskDateTaken
+            // 
+            this.mskDateTaken.Location = new System.Drawing.Point(92, 51);
+            this.mskDateTaken.Mask = "00/00/0000";
+            this.mskDateTaken.Name = "mskDateTaken";
+            this.mskDateTaken.Size = new System.Drawing.Size(162, 20);
+            this.mskDateTaken.TabIndex = 5;
+            this.mskDateTaken.ValidatingType = typeof(System.DateTime);
+            this.mskDateTaken.TypeValidationCompleted += new System.Windows.Forms.TypeValidationEventHandler(this.mskDateTaken_TypeValidationCompleted);
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -156,16 +166,6 @@
             this.txtNotes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtNotes.Size = new System.Drawing.Size(259, 85);
             this.txtNotes.TabIndex = 4;
-            // 
-            // mskDateTaken
-            // 
-            this.mskDateTaken.Location = new System.Drawing.Point(92, 51);
-            this.mskDateTaken.Mask = "00/00/0000";
-            this.mskDateTaken.Name = "mskDateTaken";
-            this.mskDateTaken.Size = new System.Drawing.Size(162, 20);
-            this.mskDateTaken.TabIndex = 5;
-            this.mskDateTaken.ValidatingType = typeof(System.DateTime);
-            this.mskDateTaken.TypeValidationCompleted += new System.Windows.Forms.TypeValidationEventHandler(this.mskDateTaken_TypeValidationCompleted);
             // 
             // PhotoEditDialog
             // 

@@ -163,6 +163,19 @@ namespace MyPhotos
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 string path = dlg.FileName;
+                string pwd = null;
+                //Get password if encrypted
+                     
+                if( AlbumStorage.IsEncrypted(path))
+                {
+                    using (AlbumPasswordDialog pwdDlg = new AlbumPasswordDialog())
+                    {
+                        pwdDlg.Album = path;
+                        if (pwdDlg.ShowDialog() != DialogResult.OK)
+                            return;// opened cancelled
+                        pwd = pwdDlg.Password;
+                    }
+                }
 
                 if (!SaveAndCloseAlbum())
                     return;
@@ -171,7 +184,7 @@ namespace MyPhotos
                 {
 
                     // open the new album
-                    Manager = new AlbumManager(dlg.FileName);
+                    Manager = new AlbumManager(path, pwd);
 
                 }
 
