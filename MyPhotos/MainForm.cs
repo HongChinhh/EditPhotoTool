@@ -154,37 +154,18 @@ namespace MyPhotos
 
         private void mnuFileOpen_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.Title = "Open Album";
-            dlg.Filter = "Album files (*.abm)|*.abm"
-                       + "|All files (*.*)|*.*";
-            dlg.InitialDirectory = AlbumManager.DefaultPath;
-            dlg.RestoreDirectory = true;
-            if (dlg.ShowDialog() == DialogResult.OK)
-            {
-                string path = dlg.FileName;
-                string pwd = null;
-                //Get password if encrypted
-                     
-                if( AlbumStorage.IsEncrypted(path))
-                {
-                    using (AlbumPasswordDialog pwdDlg = new AlbumPasswordDialog())
-                    {
-                        pwdDlg.Album = path;
-                        if (pwdDlg.ShowDialog() != DialogResult.OK)
-                            return;// opened cancelled
-                        pwd = pwdDlg.Password;
-                    }
-                }
-
-                if (!SaveAndCloseAlbum())
+            string path = null;
+            string password = null;
+            if(AlbumController.OpenAlbumDialog( ref path, ref password))
+           {      
+                 if (!SaveAndCloseAlbum())
                     return;
 
                 try
                 {
 
                     // open the new album
-                    Manager = new AlbumManager(path, pwd);
+                    Manager = new AlbumManager(path, password);
 
                 }
 
@@ -197,7 +178,6 @@ namespace MyPhotos
                 }
                 DisplayAlbum();
             }
-            dlg.Dispose();
         }
         private void SaveAlbum(string name)
         {
@@ -230,38 +210,26 @@ namespace MyPhotos
         }
         private void SaveAsAlbum()
         {
-            SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Title = "Save Album";
-            dlg.DefaultExt = "abm";
-            dlg.Filter = "Album files (*.abm)|*.abm"
-                       + "|All files (*.*)|*.*";
-            dlg.InitialDirectory = AlbumManager.DefaultPath;
-            dlg.RestoreDirectory = true;
-            if (dlg.ShowDialog() == DialogResult.OK)
+            string path = null;
+            if(AlbumController.SaveAlbumDialog(ref path ))
             {
-                SaveAlbum(dlg.FileName);
+
+                SaveAlbum(path);
                 //Update title bar to include new name
                 SetTitleBar();
             }
-            dlg.Dispose();
+           
         }
         private bool SaveAndCloseAlbum()
         {
-            if (Manager.Album.HasChanged)
-            {
-                string msg;
-                if (string.IsNullOrEmpty(Manager.FullName))
-                    msg = "Do you  wish  to save  your changes ?";
-                else
-                    msg = String.Format(" Do you wish to save your changes to \n{0}?", Manager.FullName);
-                DialogResult result = MessageBox.Show(this, msg, "Save Changes?",
-                                                       MessageBoxButtons.YesNoCancel,
-                                                       MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
-                    SaveAlbum();
+            DialogResult result = AlbumController.AskForSave(Manager);
+            
+                
+              if (result == DialogResult.Yes)
+                  SaveAlbum();
                 else if (result == DialogResult.Cancel)
                     return false;
-            }
+            
             if (Manager.Album != null)
                 Manager.Album.Dispose();
 

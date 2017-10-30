@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -33,6 +33,19 @@ namespace Manning.MyPhotoAlbum
             }
         }
         
+
+        public string GetDescriptorFormat()
+        {
+            switch (PhotoDecriptor)
+            {
+                case DescriptorOption.Caption: return "c";
+                case DescriptorOption.DateTaken: return "d";
+                case DescriptorOption.Filename: return "f";
+                default:
+                    return "f";
+
+            }
+        }
 
 
         private bool _hasChanged = false;

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using System.IO;
-
+using System.Collections.Specialized;
 namespace Manning.MyPhotoAlbum
 {
     public class AlbumManager
@@ -16,7 +16,7 @@ namespace Manning.MyPhotoAlbum
             get { return _defaultPath; }
             set { _defaultPath = value; }
         }
-       public string _pwd;
+        public string _pwd;
         public string Password
         {
             get { return _pwd; }
@@ -25,6 +25,29 @@ namespace Manning.MyPhotoAlbum
                 _pwd = value;
             }
         }
+
+        private StringCollection _photographers = null;
+        public StringCollection Photographers
+        {
+            get
+            {
+                if (Album.HasChanged || _photographers == null)
+                {
+                    _photographers = new StringCollection();
+                    foreach (Photograph p in Album)
+                    {
+                        // make sure we add each person only once
+                        string person = p.Photographer;
+                        if (person != null && person.Length > 0 && !_photographers.Contains(person))
+                        {
+                            _photographers.Add(person);
+                        }
+                    }
+                }
+                return _photographers;
+            }
+        } 
+        
 
         static AlbumManager()
         {
@@ -149,6 +172,30 @@ namespace Manning.MyPhotoAlbum
                 return false;
             Index--;
             return true;
+        }
+       
+        public void MoveItemBackward (int index)
+        {
+            if (index <= 0 || index >= Album.Count)
+                throw new IndexOutOfRangeException();
+
+            // remove photo and reinsert at prior position
+            Photograph photo = Album[index];
+            Album.RemoveAt(index);
+            Album.Insert(index - 1, photo);
+        }
+
+        public void MoveItemForward( int index)
+        {
+            if (index > 0 || index > Album.Count - 1)
+                throw new IndexOutOfRangeException();
+
+
+            // remove photo and reinsert at prior position
+            Photograph photo = Album[index];
+            Album.RemoveAt(index);
+
+            Album.Insert(index + 1, photo);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using Manning.MyPhotoAlbum;
-
+using System.Collections.Specialized;
 namespace Manning.MyPhotoControls
 {
     public partial class PhotoEditDialog : Manning.MyPhotoControls.BaseEditDialog
@@ -56,13 +56,27 @@ namespace Manning.MyPhotoControls
 
         protected override void ResetDialog()
         {
+            // Fill combo box with photographer in album
+            cmbPhotographer.BeginUpdate();
+            cmbPhotographer.Items.Clear();
+
+            if (Manager == null)
+            {
+                StringCollection coll = Manager.Photographers;
+                foreach (string s in coll)
+                    cmbPhotographer.Items.Add(s);
+            }
+            else
+                cmbPhotographer.Items.Add(Photo.Photographer);
+            cmbPhotographer.EndUpdate();
+
             Photograph photo = Photo;
             if (photo != null)
             {
                 txtPhotoFile.Text = photo.Filename;
                 txtCaption.Text = photo.Caption;
                 mskDateTaken.Text = photo.DateTaken.ToString();
-                txtPhotographer.Text = photo.Photographer;
+                cmbPhotographer.Text = photo.Photographer;
                 txtNotes.Text = photo.Note;
             }
         }
@@ -78,7 +92,7 @@ namespace Manning.MyPhotoControls
             if (photo != null)
             {
                 photo.Caption = txtCaption.Text;
-                photo.Photographer = txtPhotographer.Text;
+                photo.Photographer = cmbPhotographer.Text;
                 photo.Note = txtNotes.Text;
                 try
                 {
@@ -120,6 +134,11 @@ namespace Manning.MyPhotoControls
             }
         }
 
-       
+        private void cmbPhotographer_Leave(object sender, EventArgs e)
+        {
+            string person = cmbPhotographer.Text;
+            if (!cmbPhotographer.Items.Contains(person))
+                cmbPhotographer.Items.Add(person);
+        }
     }
 }
