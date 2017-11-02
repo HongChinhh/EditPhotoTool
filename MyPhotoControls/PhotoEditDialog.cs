@@ -51,7 +51,7 @@ namespace Manning.MyPhotoControls
         {
             _photo = photo;
             ResetDialog();
-            mskDateTaken.ValidatingType = typeof(CurrentDate);
+            
         }
 
         protected override void ResetDialog()
@@ -75,7 +75,7 @@ namespace Manning.MyPhotoControls
             {
                 txtPhotoFile.Text = photo.Filename;
                 txtCaption.Text = photo.Caption;
-                mskDateTaken.Text = photo.DateTaken.ToString();
+                dtpDateTaken.Value = photo.DateTaken;
                 cmbPhotographer.Text = photo.Photographer;
                 txtNotes.Text = photo.Note;
             }
@@ -96,7 +96,7 @@ namespace Manning.MyPhotoControls
                 photo.Note = txtNotes.Text;
                 try
                 {
-                    photo.DateTaken = DateTime.Parse(mskDateTaken.Text);
+                    photo.DateTaken = dtpDateTaken.Value;
                 }
                 catch (FormatException) { }
             }
@@ -109,17 +109,7 @@ namespace Manning.MyPhotoControls
             Text = txtCaption.Text + " - Properties";
         }
 
-        private static class CurrentDate
-        {
-            public static DateTime Parse(string input)
-            {
-                DateTime result = DateTime.Parse(input);
-                if (result > DateTime.Now)
-                    throw new FormatException("The given date is in the future.");
-                return result;
-            }
-        }
-
+       
         private void mskDateTaken_TypeValidationCompleted(object sender, TypeValidationEventArgs e)
         {
             if (!e.IsValidInput)

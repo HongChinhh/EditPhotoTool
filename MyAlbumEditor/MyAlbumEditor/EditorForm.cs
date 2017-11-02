@@ -15,6 +15,8 @@ namespace MyAlbumEditor
 {
     public partial class EditorForm : Form
     {
+        private static readonly Rectangle DrawRect = new Rectangle(0, 0, 45, 45);
+
         private AlbumManager _manager;
         private AlbumManager Manager
         {
@@ -49,6 +51,28 @@ namespace MyAlbumEditor
             }
             return false;
         }
+        private void OpenAlbum(string path)
+        {
+
+
+            string password = null;
+            if (path != null && path.Length > 0 
+                        && AlbumController.OpenAlbumDialog(ref path, ref password))
+            {
+                if (CloseAlbum())
+                    return; // cancel open
+                try
+                {
+                    Manager = new AlbumManager(path, password);
+                }
+                catch (AlbumStorageExeption)
+                {
+                    Manager = null;
+                }
+            }
+            UpdateTabs();
+            EnabledPhotoButtons();
+        }
 
         protected override void OnLoad(EventArgs e)
         {
@@ -67,43 +91,19 @@ namespace MyAlbumEditor
             Close();
         }
 
-        private void OpenAlbum(string path)
-        {
-            
-
-            string password = null;
-            if(path !=null && path.Length >0 && AlbumController.OpenAlbumDialog(ref path, ref password))
-            {
-                if (CloseAlbum())
-                    return; // cancel open
-                try
-                {
-                    Manager = new AlbumManager(path, password);
-                }
-                catch (AlbumStorageExeption)
-                {
-                    Manager = null;
-                }
-            }
-            DisplayAlbum();
-            EnabledPhotoButtons();
-        }
+        
 
         private void DisplayAlbum()
         {
             if (Manager == null)
             {
-                grpPhotos.Enabled = false;
-                btnAlbumProps.Enabled = false;
-                Text = "The selected album could be not opened";
+                
                 lstPhotos.BackColor = SystemColors.Control;
                 lstPhotos.Items.Clear();
             }
             else
             {
-                grpPhotos.Enabled = true;
-                btnAlbumProps.Enabled = true;
-                Text = "Album" + Manager.ShortName;
+               
                 lstPhotos.BackColor = SystemColors.Window;
 
                 lstPhotos.FormatString = Manager.Album.GetDescriptorFormat();
@@ -271,5 +271,83 @@ namespace MyAlbumEditor
 
             }
         }
+
+        private void lstPhotos_MeasureItem(object sender, MeasureItemEventArgs e)
+        {
+            Photograph p = Manager.Album[e.Index];
+            Rectangle scaledRect = ImageUtility.ScaleToFit(p.Image, DrawRect);
+
+            Font f = lstPhotos.Font;
+            string text = lstPhotos.GetItemText(p);
+            int textWidth = (int)e.Graphics.MeasureString(text, f).Width;
+
+            e.ItemWidth = scaledRect.Width + textWidth + 2;
+            e.ItemHeight = Math.Max(scaledRect.Height, f.Height) + 2;
+        }
+
+        private void lstPhotos_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            if (e.Index < 0 || e.Index > Manager.Album.Count - 1)
+                return;
+            Photograph p = Manager.Album[e.Index];
+
+            // Determine image rectangel
+            Rectangle imageRect = ImageUtility.ScaleToFit(p.Image, DrawRect);
+            imageRect.X = e.Bounds.X + 2;
+            imageRect.Y = e.Bounds.Y + 1;
+
+            //Draw text image
+            g.DrawImage(p.Image, imageRect);
+            g.DrawRectangle(Pens.Black, imageRect);
+            p.ReleaseImage();
+
+            // determin image rectangle 
+            Rectangle textRect = new Rectangle();
+            textRect.X = imageRect.Right + 2;
+            textRect.Y = imageRect.Y + ((imageRect.Height - e.Font.Height) / 2);
+            textRect.Width = e.Bounds.Width - imageRect.Width - 4;
+            textRect.Height = e.Font.Height;
+
+            //Determine text brush (handle selection)
+            Brush textBrush;
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected)
+            {
+                g.FillRectangle(SystemBrushes.Highlight, textRect);
+                textBrush = SystemBrushes.HighlightText;  
+            }
+            else
+            {
+                g.FillRectangle(SystemBrushes.Window, textRect);
+                textBrush = SystemBrushes.WindowText;
+            }
+            // Draw the text 
+            g.DrawString(lstPhotos.GetItemText(p), e.Font, textBrush, textRect);
+        }
+
+        private void tcPhotos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UpdateTabs();
+        }
+
+        private void UpdateTabs()
+        {
+            bool nullManager = (Manager == null);
+            if (nullManager)
+                Text = "Select Album could not be opened";
+            else
+                Text = "Album" + Manager.ShortName;
+            btnAlbumProps.Enabled = !nullManager;
+            tcPhotos.Enabled = !nullManager;
+
+            if (tcPhotos.SelectedTab == pagePhotos)
+                DisplayAlbum();
+            else if (tcPhotos.SelectedTab == pageDates)
+                ablCalendar.Manager = Manager;
+            else if (tcPhotos.SelectedTab == pageImages)
+                albumImages.Manager = Manager;
+                
+        }
+        
     }
 }
